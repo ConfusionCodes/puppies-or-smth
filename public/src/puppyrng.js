@@ -14,12 +14,30 @@ const PUPPIES = [
     "https://i.pinimg.com/originals/a8/20/f6/a820f6e2b86f678febc855972223bc6a.jpg"
 ];
 
+const FONTS = [
+    "Arial, sans-serif",
+    "Verdana, sans-serif",
+    "Tahoma, sans-serif",
+    "Trebuchet MS, sans-serif",
+    "Times New Roman, serif",
+    "Georgia, serif",
+    "Garamond, serif",
+    "Courier New, monospace",
+    "Brush Script MT, cursive",
+
+]
+const PUNCTUATION = [ '', '.', '!', '?' ]
+
+function random_element(list) {
+    return list[Math.floor(Math.random() * list.length)]
+}
+
 const PUPPY_IMAGE = document.getElementById("puppy-image");
 PUPPY_IMAGE.addEventListener("click", () => {
     let current_image = PUPPY_IMAGE.getAttribute("src");
-    var new_image = PUPPIES[Math.floor((Math.random() * PUPPIES.length))];
+    var new_image = random_element(PUPPIES);
     while (new_image == current_image) {
-        new_image = PUPPIES[Math.floor((Math.random() * PUPPIES.length))];
+        new_image = random_element(PUPPIES);
     }
     PUPPY_IMAGE.setAttribute("src", new_image);
     
@@ -35,7 +53,7 @@ PUPPY_IMAGE.addEventListener("click", () => {
     var scale = Math.random() * 2;
     var color = [Math.random() * 128 + 128, Math.random() * 128 + 128 , Math.random() * 128 + 128]
     var arf = document.createElement("p");
-    arf.textContent = "Arf!";
+    arf.textContent = "Arf" + random_element(PUNCTUATION);
     arf.className = "arf";
     arf.style.position = "absolute";
     arf.style.fontSize = "32px";
@@ -45,5 +63,6 @@ PUPPY_IMAGE.addEventListener("click", () => {
         rotate(${rotation}deg)
         scale(${scale})
     `;
+    arf.style.fontFamily = random_element(FONTS)
     document.body.appendChild(arf);
 })

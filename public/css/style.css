@@ -1,9 +1,15 @@
+html {
+    --dark-text-color: rgb(0, 192, 0);
+    --text-color: lime;
+    --background-color: rgb(15, 15, 15);
+}
+
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(15, 15, 15);
-    color: lime;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 .ui {
     position: absolute;
@@ -28,14 +34,25 @@ body {
 
 .changelog {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: start;
 }
-ul {
+.changelog ul {
     list-style-type: "– ";
+    border-left: solid green 2px;
+    margin-top: 0em;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+ul .separator {
+    list-style-type: none;
 }
 .date {
-    list-style: none;
-    color: gray;
-    display: inline-block;
-    left: 4em;
+    color: var(--dark-text-color);
+    margin-bottom: 0em;
+    border-bottom: solid green 2px;
+    padding-bottom: .5em;
+    padding-right: 2em;
+    padding-left: 1em;
 }

@@ -46,8 +46,9 @@ body {
     padding-top: 1em;
     padding-bottom: 1em;
 }
-ul .separator {
-    list-style-type: none;
+.changelog li {
+    padding-top: .1em;
+    padding-bottom: .1em;
 }
 .date {
     color: var(--dark-text-color);

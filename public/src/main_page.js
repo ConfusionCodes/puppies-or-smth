@@ -25,10 +25,29 @@ const FONTS = [
 ]
 const PUNCTUATION = [ '', '.', '!', '?' ]
 const PUPPY_IMAGE = document.getElementById("puppy-image");
-const PUPPY_IMAGE_BOUNDS = PUPPY_IMAGE.getBoundingClientRect();
+const CURRENCY_DISPLAY = document.getElementById("currency");
+const RESET_BUTTON = document.getElementById("reset-progress-button");
+const RESET_CONFIRM_DIALOG = document.getElementById("confirm-dialog");
 const BARK = new Audio("../assets/dog-bark.mp3");
+const CLICK_SFX = new Audio("../assets/click.mp3");
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
+var currency = get_currency();
+
+function get_currency() {
+    let currency = localStorage.getItem("currency");
+    if (currency == null) {
+        return 0;
+    } else {
+        return parseInt(currency);
+    }
+}
+
+function set_currency(amount) {
+    localStorage.setItem("currency", amount);
+    CURRENCY_DISPLAY.textContent = `${amount}`;
+
+}
 
 function random_element(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -54,6 +73,7 @@ function create_arf() {
     arf.style.left = `${positionX}px`;
     arf.style.top = `${positionY}px`;
     arf.style.fontFamily = random_element(FONTS);
+    arf.style.cursor = "pointer";
     document.body.appendChild(arf);
     return arf;
 }
@@ -63,9 +83,19 @@ function collides(rect1, rect2) {
         rect1.right <= rect2.left - ARF_INNER_PADDING ||
         rect1.left >= rect2.right + ARF_INNER_PADDING ||
         rect1.bottom <= rect2.top - ARF_INNER_PADDING ||
-        rect1.top >= rect2.bottom + ARF_OUTER_PADDING
+        rect1.top >= rect2.bottom + ARF_INNER_PADDING
     )
 }
+
+function click_arf(event) {
+    let arf = event.target;
+    CLICK_SFX.play();
+    currency += 1;
+    set_currency(currency);
+    arf.remove();
+}
+
+CURRENCY_DISPLAY.textContent = `${currency}`;
 
 PUPPY_IMAGE.addEventListener("click", () => {
     let current_image = PUPPY_IMAGE.getAttribute("src");
@@ -81,14 +111,24 @@ PUPPY_IMAGE.addEventListener("click", () => {
 
     var arf = create_arf();
     var arf_rect = arf.getBoundingClientRect();
-    while (collides(arf_rect, PUPPY_IMAGE_BOUNDS)) {
+    while (collides(arf_rect, PUPPY_IMAGE.getBoundingClientRect()) || collides(arf_rect, RESET_BUTTON.getBoundingClientRect())) {
         var positionX = Math.random() * (window.innerWidth - ARF_OUTER_PADDING);
         var positionY = Math.random() * (window.innerHeight - ARF_OUTER_PADDING);
         arf.style.left = `${positionX}px`;
         arf.style.top = `${positionY}px`;
         arf_rect = arf.getBoundingClientRect();
     } 
-    
-    
-    
+    arf.addEventListener("click", click_arf);    
 })
+
+RESET_BUTTON.addEventListener("click", () => {
+    RESET_CONFIRM_DIALOG.style.display = "flex";
+});
+
+RESET_CONFIRM_DIALOG.querySelector("#confirm-button").addEventListener("click", () => {
+    localStorage.clear();
+    location.reload()
+});
+RESET_CONFIRM_DIALOG.querySelector("#cancel-button").addEventListener("click", () => {
+    RESET_CONFIRM_DIALOG.style.display = "none";
+});

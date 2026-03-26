@@ -1,10 +1,13 @@
 html {
+    height: 100vh;
     --dark-text-color: rgb(0, 192, 0);
     --text-color: lime;
     --background-color: rgb(15, 15, 15);
+    --light-background-color: rgb(50, 50, 50);
 }
 
 body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,6 +33,33 @@ body {
 }
 #puppy-image {
     cursor: url("../assets/paw.png"), pointer;
+}
+#reset-progress-button {
+    padding: .25em;
+    color: white;
+    background-color: red;
+    border: solid 2px darkred;
+    cursor: pointer;
+}
+#confirm-dialog {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--light-background-color);
+    box-shadow: 10px 10px 5px rgb(0, 0, 0, 0.5);
+    padding: 1em;
+}
+#confirm-dialog .buttons {
+    margin-top: .5em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#confirm-dialog .buttons button {
+    cursor: pointer;
 }
 
 .changelog {

@@ -27,8 +27,10 @@ const PUNCTUATION = [ '', '.', '!', '?' ]
 const PUPPY_IMAGE = document.getElementById("puppy-image");
 const PUPPY_IMAGE_BOUNDS = PUPPY_IMAGE.getBoundingClientRect();
 const BARK = new Audio("../assets/dog-bark.mp3");
+const CLICK_SFX = new Audio("../assets/click.mp3");
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
+var currency = 0;
 
 function random_element(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -67,6 +69,13 @@ function collides(rect1, rect2) {
     )
 }
 
+function click_arf(arf) {
+    CLICK_SFX.play();
+    currency += 1;
+    arf.remove();
+    console.log(currency);
+}
+
 PUPPY_IMAGE.addEventListener("click", () => {
     let current_image = PUPPY_IMAGE.getAttribute("src");
     var new_image = random_element(PUPPIES);
@@ -88,7 +97,5 @@ PUPPY_IMAGE.addEventListener("click", () => {
         arf.style.top = `${positionY}px`;
         arf_rect = arf.getBoundingClientRect();
     } 
-    
-    
-    
+    arf.addEventListener("click", click_arf);    
 })

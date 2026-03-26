@@ -6,8 +6,6 @@ const PUPPIES = [
     "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Cara_de_quem_caiu_do_caminh%C3%A3o..._%28cropped%29.jpg/250px-Cara_de_quem_caiu_do_caminh%C3%A3o..._%28cropped%29.jpg",
     "https://eskipaper.com/images/adorable-puppies-1.jpg",
     "https://i.ytimg.com/vi/PqweYCDi3uc/maxresdefault.jpg",
-    "http://www.iheartteacups.com/wp-content/uploads/2017/11/IMG_6958.jpg",
-    "http://www.iheartteacups.com/wp-content/uploads/2016/09/IMG_7801.jpg",
     "https://miniteacuppups.com/wp-content/uploads/2020/11/Soonyi-Female-Teacup-Morkie-1-1024x1024.jpg",
     "https://wallpapers.com/images/hd/cute-puppies-pictures-iq9esw6nily31v5g.jpg",
     "https://i.pinimg.com/originals/87/07/cf/8707cff9dfdaf60143317263a20d6909.jpg",

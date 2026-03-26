@@ -72,6 +72,7 @@ function create_arf() {
     arf.style.left = `${positionX}px`;
     arf.style.top = `${positionY}px`;
     arf.style.fontFamily = random_element(FONTS);
+    arf.style.cursor = "pointer";
     document.body.appendChild(arf);
     return arf;
 }

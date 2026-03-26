@@ -25,6 +25,7 @@ const FONTS = [
 ]
 const PUNCTUATION = [ '', '.', '!', '?' ]
 const PUPPY_IMAGE = document.getElementById("puppy-image");
+const CURRENCY_DISPLAY = document.getElementById("currency");
 const PUPPY_IMAGE_BOUNDS = PUPPY_IMAGE.getBoundingClientRect();
 const BARK = new Audio("../assets/dog-bark.mp3");
 const CLICK_SFX = new Audio("../assets/click.mp3");
@@ -42,7 +43,9 @@ function get_currency() {
 }
 
 function set_currency(amount) {
-    localStorage.setItem("currency", currency);
+    localStorage.setItem("currency", amount);
+    CURRENCY_DISPLAY.textContent = `${amount}`;
+
 }
 
 function random_element(list) {
@@ -88,10 +91,9 @@ function click_arf(event) {
     currency += 1;
     set_currency(currency);
     arf.remove();
-    console.log(currency);
 }
 
-document.getElementById("currency").textContent = `${currency}`;
+CURRENCY_DISPLAY.textContent = `${currency}`;
 
 PUPPY_IMAGE.addEventListener("click", () => {
     let current_image = PUPPY_IMAGE.getAttribute("src");

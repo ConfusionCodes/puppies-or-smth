@@ -38,7 +38,7 @@ function get_currency() {
     if (currency == null) {
         return 0;
     } else {
-        return currency;
+        return parseInt(currency);
     }
 }
 

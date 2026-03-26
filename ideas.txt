@@ -1,4 +1,2 @@
-Arfs go away when clicking them, giving currency (Arfs?)
-Arfs have random punctuation and random fonts
 Rare chance to spawn an extra big one that gives bonus currency
 Upgrades to improve arf collection speeds

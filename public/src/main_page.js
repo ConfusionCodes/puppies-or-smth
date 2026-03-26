@@ -28,7 +28,7 @@ const PUPPY_IMAGE = document.getElementById("puppy-image");
 const CURRENCY_DISPLAY = document.getElementById("currency");
 const RESET_BUTTON = document.getElementById("reset-progress-button");
 const RESET_CONFIRM_DIALOG = document.getElementById("confirm-dialog");
-const BARK = new Audio("../assets/dog-bark.mp3");
+const BARK_SFX_PATH = "../assets/dog-bark.mp3";
 const CLICK_SFX = new Audio("../assets/click.mp3");
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
@@ -104,10 +104,11 @@ PUPPY_IMAGE.addEventListener("click", () => {
         new_image = random_element(PUPPIES);
     }
     PUPPY_IMAGE.setAttribute("src", new_image);
+    let bark = new Audio(BARK_SFX_PATH);
     
-    BARK.preservesPitch = false;
-    BARK.playbackRate = 0.8 + (Math.random() * 0.4);
-    BARK.play();
+    bark.preservesPitch = false;
+    bark.playbackRate = 0.8 + (Math.random() * 0.4);
+    bark.play();
 
     var arf = create_arf();
     var arf_rect = arf.getBoundingClientRect();

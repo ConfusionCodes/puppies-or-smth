@@ -30,7 +30,20 @@ const BARK = new Audio("../assets/dog-bark.mp3");
 const CLICK_SFX = new Audio("../assets/click.mp3");
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
-var currency = 0;
+var currency = get_currency();
+
+function get_currency() {
+    let currency = localStorage.getItem("currency");
+    if (currency == null) {
+        return 0;
+    } else {
+        return currency;
+    }
+}
+
+function set_currency(amount) {
+    localStorage.setItem("currency", currency);
+}
 
 function random_element(list) {
     return list[Math.floor(Math.random() * list.length)]
@@ -73,6 +86,7 @@ function click_arf(event) {
     let arf = event.target;
     CLICK_SFX.play();
     currency += 1;
+    set_currency(currency);
     arf.remove();
     console.log(currency);
 }

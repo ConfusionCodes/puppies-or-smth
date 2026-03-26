@@ -124,3 +124,13 @@ PUPPY_IMAGE.addEventListener("click", () => {
 RESET_BUTTON.addEventListener("click", () => {
     RESET_CONFIRM_DIALOG.style.display = "flex";
 });
+
+RESET_CONFIRM_DIALOG.getElementById("confirm-button").addEventListener("click", () => {
+    localStorage.clear();
+    RESET_CONFIRM_DIALOG.style.display = "none";
+    console.log("Reset Confirmed; local storage cleared.")
+});
+RESET_CONFIRM_DIALOG.getElementById("cancel-button").addEventListener("click", () => {
+    RESET_CONFIRM_DIALOG.style.display = "none";
+    console.log("Reset Cancelled.")
+});

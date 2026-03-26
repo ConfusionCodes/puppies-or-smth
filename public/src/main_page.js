@@ -91,6 +91,8 @@ function click_arf(event) {
     console.log(currency);
 }
 
+document.getElementById("currency").textContent = `${currency}`;
+
 PUPPY_IMAGE.addEventListener("click", () => {
     let current_image = PUPPY_IMAGE.getAttribute("src");
     var new_image = random_element(PUPPIES);

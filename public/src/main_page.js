@@ -69,7 +69,8 @@ function collides(rect1, rect2) {
     )
 }
 
-function click_arf(arf) {
+function click_arf(event) {
+    let arf = event.target;
     CLICK_SFX.play();
     currency += 1;
     arf.remove();

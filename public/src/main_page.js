@@ -26,7 +26,8 @@ const FONTS = [
 const PUNCTUATION = [ '', '.', '!', '?' ]
 const PUPPY_IMAGE = document.getElementById("puppy-image");
 const CURRENCY_DISPLAY = document.getElementById("currency");
-const PUPPY_IMAGE_BOUNDS = PUPPY_IMAGE.getBoundingClientRect();
+const RESET_BUTTON = document.getElementById("reset-progress-button");
+const RESET_CONFIRM_DIALOG = document.getElementById("confirm-dialog");
 const BARK = new Audio("../assets/dog-bark.mp3");
 const CLICK_SFX = new Audio("../assets/click.mp3");
 const ARF_OUTER_PADDING = 100;
@@ -82,7 +83,7 @@ function collides(rect1, rect2) {
         rect1.right <= rect2.left - ARF_INNER_PADDING ||
         rect1.left >= rect2.right + ARF_INNER_PADDING ||
         rect1.bottom <= rect2.top - ARF_INNER_PADDING ||
-        rect1.top >= rect2.bottom + ARF_OUTER_PADDING
+        rect1.top >= rect2.bottom + ARF_INNER_PADDING
     )
 }
 
@@ -110,7 +111,7 @@ PUPPY_IMAGE.addEventListener("click", () => {
 
     var arf = create_arf();
     var arf_rect = arf.getBoundingClientRect();
-    while (collides(arf_rect, PUPPY_IMAGE_BOUNDS)) {
+    while (collides(arf_rect, PUPPY_IMAGE.getBoundingClientRect()) || collides(arf_rect, RESET_BUTTON.getBoundingClientRect())) {
         var positionX = Math.random() * (window.innerWidth - ARF_OUTER_PADDING);
         var positionY = Math.random() * (window.innerHeight - ARF_OUTER_PADDING);
         arf.style.left = `${positionX}px`;
@@ -119,3 +120,7 @@ PUPPY_IMAGE.addEventListener("click", () => {
     } 
     arf.addEventListener("click", click_arf);    
 })
+
+RESET_BUTTON.addEventListener("click", () => {
+    RESET_CONFIRM_DIALOG.style.display = "flex";
+});

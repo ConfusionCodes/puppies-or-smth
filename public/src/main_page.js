@@ -24,12 +24,17 @@ const FONTS = [
 
 ]
 const PUNCTUATION = [ '', '.', '!', '?' ]
+
 const PUPPY_IMAGE = document.getElementById("puppy-image");
 const CURRENCY_DISPLAY = document.getElementById("currency");
 const RESET_BUTTON = document.getElementById("reset-progress-button");
 const RESET_CONFIRM_DIALOG = document.getElementById("confirm-dialog");
-const BARK_SFX_PATH = "../assets/dog-bark.mp3";
+const SHOP_BUTTON = document.getElementById("shop-button");
+const SHOP = document.getElementById("shop");
+
+const BARK_SFX_PATH = "../assets/dog_bark.mp3";
 const CLICK_SFX = new Audio("../assets/click.mp3");
+
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
 var currency = get_currency();
@@ -133,3 +138,7 @@ RESET_CONFIRM_DIALOG.querySelector("#confirm-button").addEventListener("click", 
 RESET_CONFIRM_DIALOG.querySelector("#cancel-button").addEventListener("click", () => {
     RESET_CONFIRM_DIALOG.style.display = "none";
 });
+
+SHOP_BUTTON.addEventListener("click", () => {
+    SHOP.classList.toggle("open");
+})

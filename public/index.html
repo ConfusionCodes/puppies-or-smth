@@ -6,23 +6,36 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Puppies or something.</title>
         <link rel="stylesheet" href="./css/style.css">
+        <svg width="1em" height="1em" version="1.1">
+            <symbol id="arf-bits" viewBox="0 0 33.867 33.867">
+                <g fill="currentColor"><path d="m25.401 22.224c-0.58488-2.27e-4 -1.0591 0.47397-1.0588 1.0589v8.4667c-2.86e-4 0.5849 0.47394 1.0591 1.0588 1.0588 0.5847 0 1.0586-0.47415 1.0583-1.0588v-3.176h2.1151c0.5839 2.86e-4 1.0577-0.47237 1.0588-1.0563 2.86e-4 -0.5849-0.47394-1.0591-1.0588-1.0588h-2.1151v-2.1172h3.174c0.5845 0 1.0583-0.47383 1.0583-1.0583 2.86e-4 -0.5847-0.47363-1.0589-1.0583-1.0589z"/><path d="m14.816 11.643a1.0584 1.0584 0 0 0-1.0586 1.0566v8.4668a1.0583 1.0583 0 0 0 1.0586 1.0586 1.0583 1.0583 0 0 0 1.0586-1.0586v-1.6777l2.4258 2.4258a1.0583 1.0583 0 0 0 1.498 0 1.0583 1.0583 0 0 0 0-1.4961l-2.7988-2.7969c0.37548-0.0844 0.7957-0.04718 1.1406-0.19336 0.50265-0.21302 0.97557-0.504 1.3496-0.94141 0.37404-0.4374 0.61719-1.0423 0.61719-1.6699 0-0.63686-0.23386-1.2528-0.61133-1.7012s-0.86026-0.74162-1.3672-0.94922c-1.0139-0.41521-2.1735-0.52344-3.3125-0.52344zm1.0586 2.2695c0.51823 0.06144 1.1195 0.07705 1.4512 0.21289 0.28682 0.11746 0.46523 0.2519 0.55078 0.35352 0.08555 0.10161 0.11524 0.15835 0.11523 0.33789 0 0.14345-0.02039 0.18892-0.10938 0.29297-0.08898 0.10405-0.27726 0.24577-0.56836 0.36914-0.33549 0.14218-0.92693 0.16095-1.4395 0.22852z"/><path d="m6.3495 1.0589a1.0584 1.0584 0 0 0-0.94516 0.58394l-4.2344 8.4667a1.0583 1.0583 0 0 0 0.47284 1.4201 1.0583 1.0583 0 0 0 1.4196-0.47284l1.295-2.59h3.9843l1.295 2.59a1.0583 1.0583 0 0 0 1.4201 0.47284 1.0583 1.0583 0 0 0 0.47284-1.4201l-4.2328-8.4667a1.0584 1.0584 0 0 0-0.94723-0.58394zm0 3.4236 0.93379 1.8671h-1.8676z"/><ellipse cx="7.4083" cy="26.458" rx="5.2917" ry="5.2917"/><circle cx="26.458" cy="7.4083" r="5.2917"/></g>
+            </symbol>
+        </svg>
 	</head>
 	<body>
-        <div class="ui">
+        <div class="ui changelog-button">
             <a href="./changelog">Changelog</a>
         </div>
+        <div class="ui shop-button">
+            <button id="shop-button">Shop</button>
+        </div>
+        <div id="shop" class="ui shop">
+        </div>
         <div class="heading">
-            <img id="fire-text" src="./assets/puppieslogo.gif">
+            <img id="fire-text" src="./assets/puppies_logo.gif">
         </div>
         <h1 style="color: lime; margin-bottom: 0px;">Click the Puppy</h1>
         <h2 style="color: green; margin-top: 0px;">(I dare you)</h2>
         <div class="image-container">
             <img id="puppy-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Golde33443.jpg/250px-Golde33443.jpg" width="300" height="300">
         </div>
-        <h1 style="color: lime;">Arfs: <span id="currency">0</span></h1>
+        <h1 style="color: lime;">
+            <span id="currency">0 </span>
+            <svg width="1em" height=".8em"><use href="#arf-bits" /></svg>
+        </h1>
         <div style="margin-top: auto; margin-bottom: 1em;">
             <button id="reset-progress-button">Reset Progress</button>
-            <div id="confirm-dialog">
+            <div id="confirm-dialog"> 
                 <p>
                     Are you sure you want to delete all progress?
                     <br>

@@ -141,4 +141,6 @@ RESET_CONFIRM_DIALOG.querySelector("#cancel-button").addEventListener("click", (
 
 SHOP_BUTTON.addEventListener("click", () => {
     SHOP.classList.toggle("open");
+    var open = SHOP.classList.contains("open");
+    SHOP.inert = !open;
 })

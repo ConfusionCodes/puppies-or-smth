@@ -4,18 +4,17 @@ html {
     --text-color: lime;
     --background-color: rgb(15, 15, 15);
     --light-background-color: rgb(50, 50, 50);
+    --button-color: 
 }
 
 body {
     margin: 0px;
     height: 100%;
-    /* overflow: clip; */
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: var(--background-color);
     color: var(--text-color);
-    /* overflow-x: hidden; */
 }
 .ui {
     position: fixed;
@@ -24,31 +23,41 @@ body {
     left: 1em;
     top: 1em;
 }
-.ui.shop-button {
+.ui.shop-container {
+  display: flex;
+  flex-direction: column;
+  right: 0;
+  height: 100%;
+  width: 10%;
+  text-align: end;
+}
+.shop-button {
     right: 1em;
     top: 1em;
-
+    background-color: var(--light-background-color);
+    height: 10%;
+    width: 100%;
 }
-.ui.shop {
-    display: flex;
+.shop-button button {
+    width: 100%;
     height: 100%;
-    right: 0;
-    width: 100px;
-    overflow-y: scroll;
+}
+.shop {
+    background-color: var(--light-background-color);
+    border-radius: 20px;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 1em;
+    overflow: clip auto;
+
     transform: translateX(100%);
     transition: transform 0.3s ease;
 }
-.ui.shop.open {
+.shop.open {
     transform: translateX(0);
 }
 .ui.shop-list {
     display: flex;
-    flex-direction: column;
-    background-color: var(--light-background-color);
-    margin: 10px;
-    flex-grow: 1;
-    border-radius: 20px;
-    padding: 1em;
 }
 
 .heading {

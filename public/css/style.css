@@ -79,12 +79,21 @@ body {
     justify-content: center;
     align-items: center;
 }
-.image-container {
+#image-container {
     padding: 1em;
     border: solid 2px green;
 }
-#puppy-image {
+#image-container #image {
     cursor: url("../assets/paw.png"), pointer;
+}
+#image-container .credit {
+    color: gray;
+    text-align: center;
+    margin: 0;
+}
+#image-container #image-link {
+    text-decoration: underline;
+    color: gray;
 }
 #reset-progress-button {
     padding: .25em;

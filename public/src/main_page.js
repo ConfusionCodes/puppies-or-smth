@@ -1,15 +1,13 @@
 const PUPPIES = [
-    "https://i.imgur.com/40nPh.jpeg",
-    "https://images.puppies.com/processed/fba5b9b3-2513-44a0-a61c-09e4aa67de80/listing/a0ad617a-1e67-4c9f-8e71-7d89f87db8fe/76d8573b-4a3a-4fde-9ad6-99fbf791d352-opt.webp",
-    "https://preview.redd.it/adopted-this-little-dude-today-needs-a-name-12-weeks-old-v0-vyl964z4xabg1.jpg?width=1080&crop=smart&auto=webp&s=f242397a4182485ce4a76ac13b1a590d707a6e4b",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Golde33443.jpg/250px-Golde33443.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Cara_de_quem_caiu_do_caminh%C3%A3o..._%28cropped%29.jpg/250px-Cara_de_quem_caiu_do_caminh%C3%A3o..._%28cropped%29.jpg",
-    "https://eskipaper.com/images/adorable-puppies-1.jpg",
-    "https://i.ytimg.com/vi/PqweYCDi3uc/maxresdefault.jpg",
-    "https://miniteacuppups.com/wp-content/uploads/2020/11/Soonyi-Female-Teacup-Morkie-1-1024x1024.jpg",
-    "https://wallpapers.com/images/hd/cute-puppies-pictures-iq9esw6nily31v5g.jpg",
-    "https://i.pinimg.com/originals/87/07/cf/8707cff9dfdaf60143317263a20d6909.jpg",
-    "https://i.pinimg.com/originals/a8/20/f6/a820f6e2b86f678febc855972223bc6a.jpg"
+    {img: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Golde33443.jpg", author: "Golden Trvs Gol twister", src: "Wikipedia", src_link: "https://en.wikipedia.org/wiki/Puppy#/media/File:Golde33443.jpg"},
+    {img: "./assets/puppies/double_dirt.jpg", author: "Alireza Zohoor Parvaz", src: "Pexels", src_link: "https://www.pexels.com/photo/close-up-shot-of-puppies-7256826/"},
+    {img: "./assets/puppies/bernese_white_background.jpg", author: "Poodles 2 Doodles", src: "Pexels", src_link: "https://www.pexels.com/photo/close-up-photo-of-sitting-puppy-1458926/"},
+    {img: "./assets/puppies/sitting_grass.jpg", author: "María JN", src: "Pixels", src_link: "https://www.pexels.com/photo/adorable-puppies-relaxing-on-green-grass-29628210/"},
+    {img: "./assets/puppies/running_grass.jpg", author: "Nana_Amigo_Canino", src: "Pixabay", src_link: "https://pixabay.com/photos/dog-puppy-cavalier-running-play-6977210/"},
+    {img: "./assets/puppies/hiding_bush.jpg", author: "Nana_Amigo_Canino", src: "Pixabay", src_link: "https://pixabay.com/photos/dog-pet-puppy-canine-animal-fur-6977214/"},
+    {img: "./assets/puppies/kiss.jpg", author: "Jackielsy", src: "Pixabay", src_link: "https://pixabay.com/photos/dog-animal-puppy-cute-shiba-9830812/"},
+    
+    
 ];
 const FONTS = [
     "Arial, sans-serif",
@@ -23,9 +21,12 @@ const FONTS = [
     "Brush Script MT, cursive",
 
 ]
-const PUNCTUATION = [ '', '.', '!', '?' ]
-
-const PUPPY_IMAGE = document.getElementById("puppy-image");
+const PUNCTUATION = [ '', '.', '!', '?', '¿' ]
+ 
+const PUPPY_IMAGE_CONTAINER = document.getElementById("image-container");
+const PUPPY_IMAGE = document.getElementById("image");
+const PUPPY_IMAGE_AUTHOR = document.getElementById("image-author");
+const PUPPY_IMAGE_LINK = document.getElementById("image-link");
 const CURRENCY_DISPLAY = document.getElementById("currency");
 const RESET_BUTTON = document.getElementById("reset-progress-button");
 const RESET_CONFIRM_DIALOG = document.getElementById("confirm-dialog");
@@ -38,7 +39,15 @@ const CLICK_SFX = new Audio("../assets/click.mp3");
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
 var currency = get_currency();
+var current_image = PUPPIES[0].img;
 
+function set_image_data(image_data) {
+    PUPPY_IMAGE.setAttribute("src", image_data.img);
+    PUPPY_IMAGE_AUTHOR.innerText = image_data.author;
+    PUPPY_IMAGE_LINK.setAttribute("href", image_data.src_link)
+    PUPPY_IMAGE_LINK.innerText = image_data.src;
+    current_image = image_data.img;
+}
 function get_currency() {
     let currency = localStorage.getItem("currency");
     if (currency == null) {
@@ -103,12 +112,11 @@ function click_arf(event) {
 CURRENCY_DISPLAY.textContent = `${currency}`;
 
 PUPPY_IMAGE.addEventListener("click", () => {
-    let current_image = PUPPY_IMAGE.getAttribute("src");
-    var new_image = random_element(PUPPIES);
-    while (new_image == current_image) {
-        new_image = random_element(PUPPIES);
+    var new_data = random_element(PUPPIES);
+    while (new_data.img == current_image) {
+        new_data = random_element(PUPPIES);
     }
-    PUPPY_IMAGE.setAttribute("src", new_image);
+    set_image_data(new_data);
     let bark = new Audio(BARK_SFX_PATH);
     
     bark.preservesPitch = false;

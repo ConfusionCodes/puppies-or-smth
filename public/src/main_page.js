@@ -88,6 +88,7 @@ function create_arf() {
     arf.style.top = `${positionY}px`;
     arf.style.fontFamily = random_element(FONTS);
     arf.style.cursor = "pointer";
+    arf.style.userSelect = "none";
     document.body.appendChild(arf);
     return arf;
 }
@@ -151,4 +152,10 @@ SHOP_BUTTON.addEventListener("click", () => {
     SHOP.classList.toggle("open");
     var open = SHOP.classList.contains("open");
     SHOP.inert = !open;
-})
+});
+
+document.addEventListener("mousedown", (event) => {
+    if (event.detail > 1) {
+        event.preventDefault();
+    }
+});

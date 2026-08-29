@@ -2,8 +2,10 @@ html {
     height: 100%;
     --dark-text-color: rgb(0, 192, 0);
     --text-color: lime;
+    --desaturated-text-color: rgb(128, 192, 128);
     --background-color: rgb(15, 15, 15);
     --light-background-color: rgb(50, 50, 50);
+    --lighter-background-color: rgb(80, 80, 80);
     --button-color: green;
     --button-hover-color: rgb(0, 160, 0);
     --button-click-color: darkgreen;
@@ -67,8 +69,31 @@ body {
 .shop.open {
     transform: translateX(0);
 }
-.ui.shop-list {
+.shop-item {
+    color: var(--text-color);
+    border: solid var(--button-color) 2px;
+    padding: .25em;
     display: flex;
+    flex-direction: column;
+}
+.shop-item:hover {
+    background-color: var(--lighter-background-color);
+    cursor: pointer;
+}
+.shop-item .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: solid var(--lighter-background-color) 2px;
+}
+.shop-item .header .price {
+    margin-left: auto;
+}
+.shop-item .header .title {
+    margin-left: .25em;
+}
+.shop-item .description {
+    color: var(--desaturated-text-color);
 }
 
 .heading {
@@ -79,6 +104,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 #image-container {
     padding: 1em;
     border: solid 2px green;
@@ -95,6 +121,7 @@ body {
     text-decoration: underline;
     color: gray;
 }
+
 #reset-progress-button {
     padding: .25em;
     color: white;

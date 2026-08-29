@@ -6,8 +6,6 @@ const PUPPIES = [
     {img: "./assets/puppies/running_grass.jpg", author: "Nana_Amigo_Canino", src: "Pixabay", src_link: "https://pixabay.com/photos/dog-puppy-cavalier-running-play-6977210/"},
     {img: "./assets/puppies/hiding_bush.jpg", author: "Nana_Amigo_Canino", src: "Pixabay", src_link: "https://pixabay.com/photos/dog-pet-puppy-canine-animal-fur-6977214/"},
     {img: "./assets/puppies/kiss.jpg", author: "Jackielsy", src: "Pixabay", src_link: "https://pixabay.com/photos/dog-animal-puppy-cute-shiba-9830812/"},
-    
-    
 ];
 const FONTS = [
     "Arial, sans-serif",
@@ -22,6 +20,9 @@ const FONTS = [
 
 ]
 const PUNCTUATION = [ '', '.', '!', '?', '¿' ]
+const SHOP_ITEMS = Object.freeze({
+    lucky: {price: 100, max: 100},
+});
  
 const PUPPY_IMAGE_CONTAINER = document.getElementById("image-container");
 const PUPPY_IMAGE = document.getElementById("image");
@@ -38,8 +39,12 @@ const CLICK_SFX = new Audio("../assets/click.mp3");
 
 const ARF_OUTER_PADDING = 100;
 const ARF_INNER_PADDING = 32;
-var currency = get_currency();
+var currency = fetch_currency();
 var current_image = PUPPIES[0].img;
+
+var purchases = fetch_purchases()
+
+var statistics = calculate_statistics()
 
 function set_image_data(image_data) {
     PUPPY_IMAGE.setAttribute("src", image_data.img);
@@ -48,7 +53,7 @@ function set_image_data(image_data) {
     PUPPY_IMAGE_LINK.innerText = image_data.src;
     current_image = image_data.img;
 }
-function get_currency() {
+function fetch_currency() {
     let currency = localStorage.getItem("currency");
     if (currency == null) {
         return 0;
@@ -110,6 +115,42 @@ function click_arf(event) {
     arf.remove();
 }
 
+function purchase_item(key) {
+    let item = SHOP_ITEMS[key];
+    if (item == undefined || purchases[key] >= item.max || currency < item.price) {
+        return;
+    }
+    set_currency(currency - item.price);
+
+    if (purchases[key] != undefined) {
+        purchases[key] += 1;
+    } else {
+        purchases[key] = 1;
+    }
+    localStorage.setItem("purchases", JSON.stringify(purchases));
+    statistics = calculate_statistics();
+}
+
+function fetch_purchases() {
+    var purchases = localStorage.getItem("purchases");
+    if (purchases == null) {
+        return {};
+    } else {
+        return JSON.parse(purchases);
+    }
+}
+function get_purchase(key) {
+    let value = purchases[key];
+    return value == undefined ? 0 : value;
+}
+
+
+function calculate_statistics() {
+    return {
+        second_arf_chance: get_purchase("lucky"),
+    }
+}
+
 CURRENCY_DISPLAY.textContent = `${currency}`;
 
 PUPPY_IMAGE.addEventListener("click", () => {
@@ -123,17 +164,19 @@ PUPPY_IMAGE.addEventListener("click", () => {
     bark.preservesPitch = false;
     bark.playbackRate = 0.8 + (Math.random() * 0.4);
     bark.play();
-
-    var arf = create_arf();
-    var arf_rect = arf.getBoundingClientRect();
-    while (collides(arf_rect, PUPPY_IMAGE.getBoundingClientRect()) || collides(arf_rect, RESET_BUTTON.getBoundingClientRect())) {
-        var positionX = Math.random() * (window.innerWidth - ARF_OUTER_PADDING);
-        var positionY = Math.random() * (window.innerHeight - ARF_OUTER_PADDING);
-        arf.style.left = `${positionX}px`;
-        arf.style.top = `${positionY}px`;
-        arf_rect = arf.getBoundingClientRect();
-    } 
-    arf.addEventListener("click", click_arf);    
+    var arf_count = 1 + Math.floor(Math.random() < statistics.second_arf_chance / 100.0);
+    for(var i = 0; i < arf_count; i++) {
+        var arf = create_arf();
+        var arf_rect = arf.getBoundingClientRect();
+        while (collides(arf_rect, PUPPY_IMAGE.getBoundingClientRect()) || collides(arf_rect, RESET_BUTTON.getBoundingClientRect())) {
+            var positionX = Math.random() * (window.innerWidth - ARF_OUTER_PADDING);
+            var positionY = Math.random() * (window.innerHeight - ARF_OUTER_PADDING);
+            arf.style.left = `${positionX}px`;
+            arf.style.top = `${positionY}px`;
+            arf_rect = arf.getBoundingClientRect();
+        } 
+        arf.addEventListener("click", click_arf);
+    }
 })
 
 RESET_BUTTON.addEventListener("click", () => {
@@ -153,6 +196,14 @@ SHOP_BUTTON.addEventListener("click", () => {
     var open = SHOP.classList.contains("open");
     SHOP.inert = !open;
 });
+
+for(let item of document.getElementsByClassName("shop-item")) {
+    item.addEventListener("click", () => {
+        purchase_item(item.getAttribute("item"));
+        item.querySelector(".amount .current").textContent = get_purchase(item.getAttribute("item"));
+    });
+    item.querySelector(".amount .current").textContent = get_purchase(item.getAttribute("item"));
+}
 
 document.addEventListener("mousedown", (event) => {
     if (event.detail > 1) {
